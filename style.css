@@ -6,8 +6,8 @@
 }
 
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
+    --primary: #52638a;
+    --primary-dark: #584d86;
     --danger: #ef4444;
     --danger-dark: #dc2626;
     --success: #22c55e;
@@ -30,7 +30,7 @@ body {
 
 /* ===== HEADER ===== */
 .header {
-    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    background: linear-gradient(135deg, var(--primary), #552e99);
     color: white;
     padding: 20px 16px 24px;
     position: sticky;
