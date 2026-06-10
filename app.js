@@ -25,9 +25,8 @@ function renderList() {
     if (filtered.length === 0) {
         list.innerHTML = `
             <div class="empty-state">
-                <div class="icon">${query ? '🔍' : '🚗'}</div>
+                <div class="icon">${query ? '🔍' : '⋆｡‧˚ʚ🍓ɞ˚‧｡⋆'}</div>
                 <h3>${query ? 'Ничего не найдено' : 'Список пуст'}</h3>
-                <p>${query ? 'Попробуйте изменить запрос' : 'Нажмите + чтобы добавить первый транспорт'}</p>
             </div>
         `;
         return;
@@ -39,7 +38,7 @@ function renderList() {
                 <div class="vehicle-photo" onclick="${v.photo ? `viewPhoto('${v.id}')` : ''}">
                     ${v.photo
                         ? `<img src="${v.photo}" alt="${v.number}">`
-                        : '<span class="placeholder">🚗</span>'}
+                        : '<span class="placeholder">⋆｡‧˚ʚ🍓ɞ˚‧｡⋆</span>'}
                 </div>
                 <div class="vehicle-info">
                     <div class="vehicle-number">${escapeHtml(v.number)}</div>
@@ -67,7 +66,7 @@ function saveData() {
 function openAddModal() {
     editingId = null;
     currentPhotoBase64 = null;
-    document.getElementById('modalTitle').textContent = 'Добавить транспорт';
+    document.getElementById('modalTitle').textContent = 'Добавить';
     document.getElementById('inputNumber').value = '';
     document.getElementById('inputNote').value = '';
     resetPhotoArea();
@@ -116,7 +115,7 @@ function saveVehicle() {
     const note = document.getElementById('inputNote').value.trim();
 
     if (!number) {
-        showToast('⚠️ Введите номер транспорта');
+        showToast('⚠️ Введите номер');
         document.getElementById('inputNumber').focus();
         return;
     }
@@ -129,13 +128,13 @@ function saveVehicle() {
             vehicles[idx].note = note;
             vehicles[idx].photo = currentPhotoBase64;
             vehicles[idx].timestamp = Date.now();
-            showToast('✅ Запись обновлена');
+            showToast('Запись обновлена');
         }
     } else {
         // Проверка дубликата
         const exists = vehicles.find(v => v.number.toUpperCase() === number.toUpperCase());
         if (exists) {
-            showToast('⚠️ Такой номер уже есть');
+            showToast('Такой номер уже есть');
             return;
         }
 
@@ -146,7 +145,7 @@ function saveVehicle() {
             photo: currentPhotoBase64,
             timestamp: Date.now()
         });
-        showToast('✅ Транспорт добавлен');
+        showToast('ЯПИИИ +1');
     }
 
     saveData();
@@ -244,7 +243,7 @@ function removePhoto() {
     resetPhotoArea();
 }
 
-// Быстрое фото из карточки
+// Quick photo from card
 function quickPhoto(id) {
     editingId = id;
     const input = document.getElementById('fileInput');
