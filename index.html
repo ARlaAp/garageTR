@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Контроль транспорта</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1><span>🚗</span> Контроль транспорта</h1>
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Поиск по номеру..." oninput="renderList()">
+        </div>
+        <div class="stats-bar">
+            <div class="stat-chip" id="totalCount">Всего: 0</div>
+        </div>
+    </div>
+
+    <!-- VEHICLE LIST -->
+    <div class="vehicle-list" id="vehicleList"></div>
+
+    <!-- FAB -->
+    <button class="fab" onclick="openAddModal()">+</button>
+
+    <!-- ADD/EDIT MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+        <div class="modal">
+            <div class="modal-handle"></div>
+            <h2 id="modalTitle">Добавить транспорт</h2>
+
+            <div class="form-group">
+                <label>Номер транспорта</label>
+                <input type="text" id="inputNumber" placeholder="Например: А123БВ 77"
+                       style="text-transform: uppercase; font-weight: 700; letter-spacing: 2px;">
+            </div>
+
+            <div class="form-group">
+                <label>Заметка / Описание</label>
+                <textarea id="inputNote" placeholder="Марка, модель, примечания..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Фото</label>
+                <div class="photo-upload-area" id="photoUploadArea" onclick="triggerFileInput()">
+                    <span class="upload-icon">📷</span>
+                    <span class="upload-text">Нажмите для выбора фото</span>
+                </div>
+                <input type="file" accept="image/*" capture="environment"
+                       class="hidden-input" id="fileInput" onchange="handleFileSelect(event)">
+            </div>
+
+            <button class="btn-primary" id="btnSave" onclick="saveVehicle()">Сохранить</button>
+            <button class="btn-secondary" onclick="closeModal()">Отмена</button>
+        </div>
+    </div>
+
+    <!-- CONFIRM DIALOG -->
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-dialog">
+            <div class="confirm-icon">🗑️</div>
+            <h3>Удалить запись?</h3>
+            <p id="confirmText">Это действие нельзя отменить.</p>
+            <div class="confirm-buttons">
+                <button class="btn-cancel" onclick="closeConfirm()">Отмена</button>
+                <button class="btn-confirm-delete" id="btnConfirmDelete">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTO VIEWER -->
+    <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">
+        <button class="close-viewer" onclick="closeViewer()">✕</button>
+        <img id="viewerImage" src="" alt="Фото">
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
